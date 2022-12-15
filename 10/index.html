@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>База данных студентов</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+  <script defer src="students-data.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h2 class="g-10">База данных студентов</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">ФИО студента</th>
+        <th scope="col">Факультет</th>
+        <th scope="col">Дата рождения и возраст</th>
+        <th scope="col">Годы обучения и номер курса</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Филоник Кирилл Русланович</td>
+        <td>ИРИТ-РТФ</td>
+        <td>19.04.2003 (19 лет)</td>
+        <td>2021-2025 (2 курс)</td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Добавить студента
+  </button>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Форма для добавления студента</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form name="student">
+            <div class="mb-3">
+              <label for="name" class="form-label">Имя студента</label>
+              <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="mb-3">
+              <label for="surname" class="form-label">Фамилия студента</label>
+              <input type="text" class="form-control" id="surname" name="surname">
+            </div>
+            <div class="mb-3">
+              <label for="middleName" class="form-label">Отчество студента</label>
+              <input type="text" class="form-control" id="middleName" name="middleName">
+            </div>
+            <div class="mb-3">
+              <label for="department" class="form-label">Факультет</label>
+              <input type="text" class="form-control" id="department" name="department">
+            </div>
+            <div class="mb-3">
+              <label for="birthDate" class="form-label">Дата рождения</label>
+              <input type="date" class="form-control" id="birthDate" name="birthDate" min="1900-01-01">
+            </div>
+            <div class="mb-3">
+              <label for="studyStart" class="form-label">Год начала обучения</label>
+              <input type="text" class="form-control" id="studyStart" name="studyStart">
+            </div>
+            <button type="button" id="addStudent" class="btn btn-primary">Добавить студента</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>
