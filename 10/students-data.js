@@ -9,7 +9,7 @@
             let birthDate = document.createElement("td");
             let studyStart = document.createElement("td");
 
-            fullName.textContent = [student.name, student.surname, student.middleName].join(" ");
+            fullName.textContent = [student.surname, student.name, student.middleName].join(" ");
             department.textContent = student.department;
             birthDate.textContent = getCorrectBirthDateInfo(student.birthDate);
             studyStart.textContent = getCorrectStudyStartDateInfo(student.studyStart);
@@ -30,17 +30,77 @@
     function getCorrectStudyStartDateInfo(studyStart) {
         const courseNum = (new Date().getFullYear() - studyStart)
             + (new Date().getMonth() > 8 ? 1 : 0);
-        return `${studyStart}-${studyStart + 4} (${courseNum} курс)`;
+        const coursInfo = (courseNum > 4) ? "закончил" : `${courseNum} курс`;
+        return `${studyStart}-${Number(studyStart) + 4} (${coursInfo})`;
+    }
+
+    function addTableFilters(students) {
+        const fullNameTitle = document.getElementById("fullName-title");
+        const departmentTitle = document.getElementById("department-title");
+        const birthDateTitle = document.getElementById("birthDate-title");
+        const studyStartTitle = document.getElementById("studyStart-title");
+        console.log(students)
+        fullNameTitle.addEventListener("click", () => {
+            generateTable(students.slice().sort((a, b) => {
+                if ([a.surname, a.name, a.middleName].join("") > [b.surname, b.name, b.middleName].join(""))
+                    return 1;
+                if ([a.surname, a.name, a.middleName].join("") < [b.surname, b.name, b.middleName].join(""))
+                    return -1;
+                return 0;
+            }));
+        });
+        departmentTitle.addEventListener("click", () => {
+            generateTable(students.slice().sort((a, b) => {
+                if (a.department > b.department)
+                    return 1;
+                if (a.department < b.department)
+                    return -1;
+                return 0;
+            }));
+        });
+        birthDateTitle.addEventListener("click", () => {
+            generateTable(students.slice().sort((a, b) => {
+                if (a.birthDate > b.birthDate)
+                    return 1;
+                if (a.birthDate < b.birthDate)
+                    return -1;
+                return 0;
+            }));
+        });
+        studyStartTitle.addEventListener("click", () => {
+            generateTable(students.slice().sort((a, b) => a.studyStart - b.studyStart));
+        });
     }
 
     function createStudentsData() {
-        let students = []
+        let students = [
+            {
+                name: "Амина",
+                surname: "Шахтарина",
+                middleName: "Андреевна",
+                department: "ИЕНИМ",
+                birthDate: new Date("14.01.2002"),
+                studyStart: "2019"
+            },
+            {
+                name: "Кирилл",
+                surname: "Филоник",
+                middleName: "Русланович",
+                department: "ИРИТ-РТФ",
+                birthDate: new Date("19.04.2003"),
+                studyStart: "2021"
+            },
+
+        ]
         const addStudentBtn = document.getElementById("addStudent");
+        addTableFilters(students);
         addStudentBtn.addEventListener("click", () => {
             const form = document.forms.student;
             if (validateForm(form)) {
                 students.push(addStudent(form));
                 generateTable(students);
+                [...form.querySelectorAll('input')].map((input) => input.value = '');
+
             }
         });
     }
