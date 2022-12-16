@@ -17,14 +17,13 @@
             row.append(fullName, department, birthDate, studyStart);
             table.append(row);
         }
-
     }
 
     function getCorrectBirthDateInfo(birthDate) {
         const yearsNum = new Date().getFullYear() - birthDate.getFullYear();
         const correctMonth = (birthDate.getMonth() + 1 < 10 ? "0" : "") + (birthDate.getMonth() + 1);
         const correctBirthDate = `${birthDate.getDate()}.${correctMonth}.${birthDate.getFullYear()}`;
-        return `${correctBirthDate} (${yearsNum} лет)`
+        return `${correctBirthDate} (${yearsNum} лет)`;
     }
 
     function getCorrectStudyStartDateInfo(studyStart) {
@@ -35,11 +34,30 @@
     }
 
     function addTableFilters(students) {
+        const form = document.forms.filter;
+        const fullNameFilter = form.elements.filter__fullName;
+        const departmentFilter = form.elements.filter__department;
+        const yearEnrolmentFilter = form.elements.filter__year_enrolment;
+        const graduationYearFilter = form.elements.filter__graduation_year;
+
+        const filterInput = (student) => {
+            return ([student.surname, student.name, student.middleName].join(" ").indexOf(fullNameFilter.value) != -1
+                || fullNameFilter.value === "")
+                && (student.department.indexOf(departmentFilter.value) != -1 || departmentFilter.value === "")
+                && (student.studyStart === yearEnrolmentFilter.value || yearEnrolmentFilter.value === "")
+                && (Number(student.studyStart) + 4 === Number(graduationYearFilter.value) || graduationYearFilter.value === "")
+        }
+        [...form.querySelectorAll('input')].forEach(input => input.addEventListener("input", () => {
+            setTimeout(() => generateTable(students.filter(filterInput)), 1000);
+        }));
+
+    }
+
+    function addTableSortings(students) {
         const fullNameTitle = document.getElementById("fullName-title");
         const departmentTitle = document.getElementById("department-title");
         const birthDateTitle = document.getElementById("birthDate-title");
         const studyStartTitle = document.getElementById("studyStart-title");
-        console.log(students)
         fullNameTitle.addEventListener("click", () => {
             generateTable(students.slice().sort((a, b) => {
                 if ([a.surname, a.name, a.middleName].join("") > [b.surname, b.name, b.middleName].join(""))
@@ -49,6 +67,7 @@
                 return 0;
             }));
         });
+
         departmentTitle.addEventListener("click", () => {
             generateTable(students.slice().sort((a, b) => {
                 if (a.department > b.department)
@@ -58,6 +77,7 @@
                 return 0;
             }));
         });
+
         birthDateTitle.addEventListener("click", () => {
             generateTable(students.slice().sort((a, b) => {
                 if (a.birthDate > b.birthDate)
@@ -67,32 +87,16 @@
                 return 0;
             }));
         });
+
         studyStartTitle.addEventListener("click", () => {
             generateTable(students.slice().sort((a, b) => a.studyStart - b.studyStart));
         });
     }
 
     function createStudentsData() {
-        let students = [
-            {
-                name: "Амина",
-                surname: "Шахтарина",
-                middleName: "Андреевна",
-                department: "ИЕНИМ",
-                birthDate: new Date("14.01.2002"),
-                studyStart: "2019"
-            },
-            {
-                name: "Кирилл",
-                surname: "Филоник",
-                middleName: "Русланович",
-                department: "ИРИТ-РТФ",
-                birthDate: new Date("19.04.2003"),
-                studyStart: "2021"
-            },
-
-        ]
+        let students = [];
         const addStudentBtn = document.getElementById("addStudent");
+        addTableSortings(students);
         addTableFilters(students);
         addStudentBtn.addEventListener("click", () => {
             const form = document.forms.student;
@@ -100,7 +104,6 @@
                 students.push(addStudent(form));
                 generateTable(students);
                 [...form.querySelectorAll('input')].map((input) => input.value = '');
-
             }
         });
     }
@@ -159,7 +162,6 @@
             }
             else
                 form.querySelector("p").innerHTML = errorMessageText;
-
         }
 
         return isCorrect;

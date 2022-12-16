@@ -15,74 +15,94 @@
 </head>
 
 <body>
-  <div class="container">
-    <h2 class="g-10">База данных студентов</h2>
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th scope="col" id="fullName-title">ФИО студента</th>
-        <th scope="col" id="department-title">Факультет</th>
-        <th scope="col" id="birthDate-title">Дата рождения и возраст</th>
-        <th scope="col" id="studyStart-title">Годы обучения и номер курса</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Шахтарина Амина Андреевна</td>
-        <td>ИЕНИМ</td>
-        <td>14.01.2002 (19 лет)</td>
-        <td>2019-2023 (4 курс)</td>
-      </tr>
-      <tr>
-        <td>Филоник Кирилл Русланович</td>
-        <td>ИРИТ-РТФ</td>
-        <td>19.04.2003 (19 лет)</td>
-        <td>2021-2025 (2 курс)</td>
-      </tr>
-    </tbody>
-  </table>
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Добавить студента
-  </button>
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Форма для добавления студента</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form name="student">
-            <div class="mb-3">
-              <label for="name" class="form-label">Имя студента</label>
-              <input type="text" class="form-control" id="name" name="name" required>
-            </div>
-            <div class="mb-3">
-              <label for="surname" class="form-label">Фамилия студента</label>
-              <input type="text" class="form-control" id="surname" name="surname" required>
-            </div>
-            <div class="mb-3">
-              <label for="middleName" class="form-label">Отчество студента</label>
-              <input type="text" class="form-control" id="middleName" name="middleName" required>
-            </div>
-            <div class="mb-3">
-              <label for="department" class="form-label">Факультет</label>
-              <input type="text" class="form-control" id="department" name="department" required>
-            </div>
-            <div class="mb-3">
-              <label for="birthDate" class="form-label">Дата рождения</label>
-              <input type="date" class="form-control" id="birthDate" name="birthDate" min="1900-01-01" required>
-            </div>
-            <div class="mb-3">
-              <label for="studyStart" class="form-label">Год начала обучения</label>
-              <input type="text" class="form-control" id="studyStart" name="studyStart" required>
-            </div>
-            <button type="button" id="addStudent" class="btn btn-primary">Добавить студента</button>
-          </form>
+  <div class="container p-3">
+    <h1 class="g-10 mb-5">База данных студентов</h1>
+    <form name="filter">
+      <h3 class="g-10 mb-3">Фильтры</h3>
+      <div class="mb-3">
+        <label for="filter__fullName" class="form-label">Фамилия Имя Отчество</label>
+        <input type="text" class="form-control" id="filter__fullName" name="filter__fullName" required>
+      </div>
+      <div class="mb-3">
+        <label for="filter__department" class="form-label">Факультет</label>
+        <input type="text" class="form-control" id="filter__department" name="filter__department" required>
+      </div>
+      <div class="mb-3">
+        <label for="filter__year_enrolment" class="form-label">Год начала обучения</label>
+        <input type="text" class="form-control" id="filter__year_enrolment" name="filter__year_enrolment" required>
+      </div>
+      <div class="mb-3">
+        <label for="filter__graduation_year" class="form-label">Год окончания обучения</label>
+        <input type="text" class="form-control" id="filter__graduation_year" name="filter__graduation_year" required>
+      </div>
+    </form>
+    <h3 class="g-10 mb-3">Таблица</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col" id="fullName-title">ФИО студента</th>
+          <th scope="col" id="department-title">Факультет</th>
+          <th scope="col" id="birthDate-title">Дата рождения и возраст</th>
+          <th scope="col" id="studyStart-title">Годы обучения и номер курса</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Шахтарина Амина Андреевна</td>
+          <td>ИЕНИМ</td>
+          <td>14.01.2002 (19 лет)</td>
+          <td>2019-2023 (4 курс)</td>
+        </tr>
+        <tr>
+          <td>Филоник Кирилл Русланович</td>
+          <td>ИРИТ-РТФ</td>
+          <td>19.04.2003 (19 лет)</td>
+          <td>2021-2025 (2 курс)</td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Добавить студента
+    </button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Форма для добавления студента</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form name="student">
+              <div class="mb-3">
+                <label for="name" class="form-label">Имя студента</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+              </div>
+              <div class="mb-3">
+                <label for="surname" class="form-label">Фамилия студента</label>
+                <input type="text" class="form-control" id="surname" name="surname" required>
+              </div>
+              <div class="mb-3">
+                <label for="middleName" class="form-label">Отчество студента</label>
+                <input type="text" class="form-control" id="middleName" name="middleName" required>
+              </div>
+              <div class="mb-3">
+                <label for="department" class="form-label">Факультет</label>
+                <input type="text" class="form-control" id="department" name="department" required>
+              </div>
+              <div class="mb-3">
+                <label for="birthDate" class="form-label">Дата рождения</label>
+                <input type="date" class="form-control" id="birthDate" name="birthDate" min="1900-01-01" required>
+              </div>
+              <div class="mb-3">
+                <label for="studyStart" class="form-label">Год начала обучения</label>
+                <input type="text" class="form-control" id="studyStart" name="studyStart" required>
+              </div>
+              <button type="button" id="addStudent" class="btn btn-primary">Добавить студента</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </body>
 
