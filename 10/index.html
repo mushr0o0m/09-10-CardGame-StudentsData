@@ -49,27 +49,27 @@
           <form name="student">
             <div class="mb-3">
               <label for="name" class="form-label">Имя студента</label>
-              <input type="text" class="form-control" id="name" name="name">
+              <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="mb-3">
               <label for="surname" class="form-label">Фамилия студента</label>
-              <input type="text" class="form-control" id="surname" name="surname">
+              <input type="text" class="form-control" id="surname" name="surname" required>
             </div>
             <div class="mb-3">
               <label for="middleName" class="form-label">Отчество студента</label>
-              <input type="text" class="form-control" id="middleName" name="middleName">
+              <input type="text" class="form-control" id="middleName" name="middleName" required>
             </div>
             <div class="mb-3">
               <label for="department" class="form-label">Факультет</label>
-              <input type="text" class="form-control" id="department" name="department">
+              <input type="text" class="form-control" id="department" name="department" required>
             </div>
             <div class="mb-3">
               <label for="birthDate" class="form-label">Дата рождения</label>
-              <input type="date" class="form-control" id="birthDate" name="birthDate" min="1900-01-01">
+              <input type="date" class="form-control" id="birthDate" name="birthDate" min="1900-01-01" required>
             </div>
             <div class="mb-3">
               <label for="studyStart" class="form-label">Год начала обучения</label>
-              <input type="text" class="form-control" id="studyStart" name="studyStart">
+              <input type="text" class="form-control" id="studyStart" name="studyStart" required>
             </div>
             <button type="button" id="addStudent" class="btn btn-primary">Добавить студента</button>
           </form>
